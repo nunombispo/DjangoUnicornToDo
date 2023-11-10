@@ -1,0 +1,31 @@
+<div>
+    <h1>Task List</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <div>
+                    <h2>{{ task.title }}</h2>
+                    <p>{{ task.description }}</p>
+                    <button unicorn:click="delete({{ task.id }})">Delete</button>
+                    <button unicorn:click="edit({{ task.id }})">Edit</button>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <div>
+        <h1>Task Form</h1>
+        <form unicorn:submit.prevent="add">
+            <input type="text"
+              unicorn:model.defer="task_title"
+              placeholder="Title" id="task_title"></input>
+            <input type="textarea"
+              unicorn:model.defer="task_description"
+              placeholder="Description" id="task_description"></input>
+          </form>
+        {% if task_id %}
+            <button unicorn:click="update({{ task_id }})">Update</button>
+        {% else %}
+            <button unicorn:click="add">Add</button>
+        {% endif %}
+</div>
+</div>
